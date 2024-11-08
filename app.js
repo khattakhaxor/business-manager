@@ -54,11 +54,18 @@ function saveData() {
   const grossProfit = revenue - totalInvestment;
   const netProfit = grossProfit - (grossProfit * (commissionRate / 100));
 
-  const entry = { product, totalInvestment, revenue, netProfit };
+  // Store the new entry
+  const entry = {
+    product,
+    totalInvestment,
+    revenue,
+    netProfit,
+  };
+
   savedData.push(entry);
   localStorage.setItem('businessData', JSON.stringify(savedData));
 
-  // Add row to table
+  // Add row to the table
   const row = dataTableBody.insertRow();
   row.innerHTML = `
     <td>${entry.product}</td>
