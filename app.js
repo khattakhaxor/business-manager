@@ -18,6 +18,7 @@ let savedData = JSON.parse(localStorage.getItem('businessData')) || [];
 
 function calculateProfit(event) {
   event.preventDefault();
+
   const product = document.getElementById('product').value;
   const purchasePrice = parseFloat(document.getElementById('purchasePrice').value);
   const sellingPrice = parseFloat(document.getElementById('sellingPrice').value);
@@ -110,4 +111,8 @@ function showGraph() {
       }
     }
   });
+
+  // Show Graph and Hide Button
+  graphCanvas.style.display = 'block';
+  showGraphBtn.style.display = 'none';
 }
