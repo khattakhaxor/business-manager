@@ -1,14 +1,13 @@
-/* Reset CSS for consistency */
+/* Reset CSS */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f4f4f9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,25 +15,24 @@ body {
   padding: 20px;
 }
 
-/* Main container */
 .container {
   max-width: 600px;
   width: 100%;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 30px;
   text-align: center;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2.2em;
   color: #333;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-/* Form Styling */
+/* Form styling */
 form {
   display: grid;
   grid-gap: 15px;
@@ -47,14 +45,16 @@ form label {
   color: #333;
 }
 
-form input, form button {
+form input,
+form button {
   padding: 12px;
   font-size: 1em;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
-form input:focus, form button:focus {
+form input:focus,
+form button:focus {
   border-color: #28a745;
   outline: none;
 }
@@ -75,7 +75,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Result box */
+/* Result styling */
 #result {
   margin-top: 20px;
   padding: 15px;
@@ -87,26 +87,25 @@ button:disabled {
   display: none;
 }
 
-/* Data Table Styling */
 #dataTable {
   width: 100%;
-  border-collapse: collapse;
   margin-top: 20px;
+  border-collapse: collapse;
 }
 
-#dataTable th, #dataTable td {
+#dataTable th,
+#dataTable td {
   padding: 12px;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 #dataTable th {
   background-color: #f4f4f4;
-  text-align: left;
-  font-weight: 600;
 }
 
 #dataTable td {
-  text-align: center;
+  font-size: 0.9em;
 }
 
 #dataTable button {
@@ -127,14 +126,6 @@ button:disabled {
   background-color: #004085;
 }
 
-/* Graph Section */
-#graphCanvas {
-  display: none;
-  margin-top: 30px;
-  width: 100%;
-  height: 400px;
-}
-
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
@@ -145,12 +136,14 @@ button:disabled {
     font-size: 1.8em;
   }
 
-  form label, form input, form button {
+  form label,
+  form input,
+  form button {
     font-size: 1em;
   }
 
   #result {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   #dataTable button {
