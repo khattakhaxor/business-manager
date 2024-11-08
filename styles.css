@@ -1,4 +1,4 @@
-/* Reset CSS */
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -75,7 +75,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Result styling */
+/* Result section */
 #result {
   margin-top: 20px;
   padding: 15px;
@@ -126,7 +126,7 @@ button:disabled {
   background-color: #004085;
 }
 
-/* Mobile Responsiveness */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
   .container {
     padding: 20px;
