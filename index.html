@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Manager</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Business Manager</h1>
-    <form id="investmentForm">
-      <label for="product">Product Name:</label>
-      <input type="text" id="product" name="product" required>
 
-      <label for="purchasePrice">Purchase Price (PKR):</label>
-      <input type="number" id="purchasePrice" name="purchasePrice" required>
+    <div class="container">
+        <h1>Business Investment Tracker</h1>
+        <form id="investmentForm">
+            <label for="product">Product</label>
+            <input type="text" id="product" required>
 
-      <label for="sellingPrice">Selling Price (PKR):</label>
-      <input type="number" id="sellingPrice" name="sellingPrice" required>
+            <label for="purchasePrice">Purchase Price (per unit)</label>
+            <input type="number" id="purchasePrice" required>
 
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity" required>
+            <label for="sellingPrice">Selling Price (per unit)</label>
+            <input type="number" id="sellingPrice" required>
 
-      <label for="commission">Commission Rate (%):</label>
-      <input type="number" id="commission" name="commission" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" required>
 
-      <button type="submit">Calculate Profit</button>
-      <button type="button" id="saveData">Save Data</button>
-    </form>
+            <label for="commission">Commission (%)</label>
+            <input type="number" id="commission" required>
 
-    <!-- Result Section -->
-    <div id="result" class="hidden"></div>
+            <button type="submit">Calculate Profit</button>
+        </form>
 
-    <!-- Data Table Section -->
-    <div id="dataSection">
-      <h3>Saved Data</h3>
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Total Investment</th>
-            <th>Revenue</th>
-            <th>Net Profit</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+        <div id="result" class="result">
+            <h3>Result:</h3>
+            <p><strong>Total Investment:</strong> PKR <span id="totalInvestment"></span></p>
+            <p><strong>Revenue:</strong> PKR <span id="revenue"></span></p>
+            <p><strong>Net Profit after commission:</strong> PKR <span id="netProfit"></span></p>
+            <button id="saveData" style="display:none;">Save Data</button>
+        </div>
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Total Investment</th>
+                    <th>Revenue</th>
+                    <th>Net Profit</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows will appear here -->
+            </tbody>
+        </table>
+
+        <button id="showGraph" style="display:none;">Show Graphical View</button>
+        <canvas id="graphCanvas"></canvas>
     </div>
 
-    <!-- Graphical View Button and Section -->
-    <button id="showGraph">Show Graphical View</button>
-    <canvas id="graphCanvas"></canvas>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
