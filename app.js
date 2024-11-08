@@ -58,7 +58,7 @@ function saveData() {
     product,
     totalInvestment,
     revenue,
-    netProfit,
+    netProfit
   };
 
   savedData.push(entry);
@@ -73,9 +73,6 @@ function saveData() {
     <td>PKR ${entry.netProfit.toFixed(2)}</td>
     <td><button onclick="deleteEntry(this)">Delete</button></td>
   `;
-
-  // Show Graph button
-  showGraphBtn.style.display = 'inline-block';
 }
 
 // Delete entry from table and localStorage
@@ -101,7 +98,7 @@ function showGraph() {
         data: data,
         backgroundColor: 'rgba(0, 123, 255, 0.5)',
         borderColor: 'rgba(0, 123, 255, 1)',
-        borderWidth: 1,
+        borderWidth: 1
       }]
     },
     options: {
