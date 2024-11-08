@@ -1,118 +1,75 @@
-// Elements
-const resultDiv = document.getElementById('result');
-const saveButton = document.getElementById('saveData');
-const showGraphBtn = document.getElementById('showGraph');
-const dataTableBody = document.getElementById('dataTable').querySelector('tbody');
-const graphCanvas = document.getElementById('graphCanvas');
+// Function to calculate revenue, profit, commission, and target
+function calculateData() {
+    const investment = parseFloat(document.getElementById('investment').value);
+    const revenue = parseFloat(document.getElementById('revenue').value);
+    const commissionRate = parseFloat(document.getElementById('commissionRate').value);
 
-// Event listener for Calculate Profit
-document.getElementById('investmentForm').addEventListener('submit', calculateProfit);
-
-// Event listener for Save Data
-saveButton.addEventListener('click', saveData);
-
-// Event listener for Show Graph
-showGraphBtn.addEventListener('click', showGraph);
-
-let savedData = JSON.parse(localStorage.getItem('businessData')) || [];
-
-function calculateProfit(event) {
-  event.preventDefault();
-
-  const product = document.getElementById('product').value;
-  const purchasePrice = parseFloat(document.getElementById('purchasePrice').value);
-  const sellingPrice = parseFloat(document.getElementById('sellingPrice').value);
-  const quantity = parseInt(document.getElementById('quantity').value, 10);
-  const commissionRate = parseFloat(document.getElementById('commission').value);
-
-  const totalInvestment = purchasePrice * quantity;
-  const revenue = sellingPrice * quantity;
-  const grossProfit = revenue - totalInvestment;
-  const netProfit = grossProfit - (grossProfit * (commissionRate / 100));
-
-  // Show result on screen
-  document.getElementById('totalInvestment').innerText = totalInvestment.toFixed(2);
-  document.getElementById('revenue').innerText = revenue.toFixed(2);
-  document.getElementById('netProfit').innerText = netProfit.toFixed(2);
-
-  // Show the result section
-  resultDiv.style.display = 'block';
-
-  // Show the Save Data button
-  saveButton.style.display = 'inline-block';
-}
-
-// Save data to localStorage
-function saveData() {
-  const product = document.getElementById('product').value;
-  const purchasePrice = parseFloat(document.getElementById('purchasePrice').value);
-  const sellingPrice = parseFloat(document.getElementById('sellingPrice').value);
-  const quantity = parseInt(document.getElementById('quantity').value, 10);
-  const commissionRate = parseFloat(document.getElementById('commission').value);
-
-  const totalInvestment = purchasePrice * quantity;
-  const revenue = sellingPrice * quantity;
-  const grossProfit = revenue - totalInvestment;
-  const netProfit = grossProfit - (grossProfit * (commissionRate / 100));
-
-  const entry = {
-    product,
-    totalInvestment,
-    revenue,
-    netProfit
-  };
-
-  savedData.push(entry);
-  localStorage.setItem('businessData', JSON.stringify(savedData));
-
-  // Insert data into table
-  const row = dataTableBody.insertRow();
-  row.innerHTML = `
-    <td>${entry.product}</td>
-    <td>PKR ${entry.totalInvestment.toFixed(2)}</td>
-    <td>PKR ${entry.revenue.toFixed(2)}</td>
-    <td>PKR ${entry.netProfit.toFixed(2)}</td>
-    <td><button onclick="deleteEntry(this)">Delete</button></td>
-  `;
-}
-
-// Delete entry from table and localStorage
-function deleteEntry(button) {
-  const rowIndex = button.parentElement.parentElement.rowIndex - 1;
-  savedData.splice(rowIndex, 1);
-  localStorage.setItem('businessData', JSON.stringify(savedData));
-
-  button.closest('tr').remove();
-}
-
-// Show Graph
-function showGraph() {
-  const labels = savedData.map(entry => entry.product);
-  const data = savedData.map(entry => entry.netProfit);
-
-  new Chart(graphCanvas, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Net Profit (PKR)',
-        data: data,
-        backgroundColor: 'rgba(0, 123, 255, 0.5)',
-        borderColor: 'rgba(0, 123, 255, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+    if (isNaN(investment) || isNaN(revenue) || isNaN(commissionRate)) {
+        alert('Please enter valid numbers');
+        return;
     }
-  });
 
-  // Show Graph and Hide Button
-  graphCanvas.style.display = 'block';
-  showGraphBtn.style.display = 'none';
+    const commission = (commissionRate / 100) * revenue;
+    const profit = revenue - investment - commission;
+    const target = revenue * 1.1; // Estimated target for next month, assuming 10% growth
+
+    document.getElementById('profit').innerText = `Profit: PKR ${profit.toFixed(2)}`;
+    document.getElementById('commission').innerText = `Commission: PKR ${commission.toFixed(2)}`;
+    document.getElementById('target').innerText = `Estimated Target for Next Month: PKR ${target.toFixed(2)}`;
+
+    // Draw the chart
+    drawChart(profit, commission, target);
+}
+
+// Function to draw the chart
+function drawChart(profit, commission, target) {
+    const ctx = document.getElementById('profitChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Profit', 'Commission', 'Target'],
+            datasets: [{
+                label: 'PKR',
+                data: [profit, commission, target],
+                backgroundColor: ['#4CAF50', '#FF9800', '#2196F3'],
+                borderColor: ['#388E3C', '#F57C00', '#1976D2'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+// Save and Load Data (for local storage, later replace with online DB like Firebase)
+function saveData() {
+    const investment = document.getElementById('investment').value;
+    const revenue = document.getElementById('revenue').value;
+    const commissionRate = document.getElementById('commissionRate').value;
+
+    if (investment && revenue && commissionRate) {
+        const data = { investment, revenue, commissionRate };
+        localStorage.setItem('businessData', JSON.stringify(data));
+        alert('Data saved successfully!');
+    } else {
+        alert('Please enter valid data to save.');
+    }
+}
+
+function loadData() {
+    const savedData = localStorage.getItem('businessData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        document.getElementById('investment').value = data.investment;
+        document.getElementById('revenue').value = data.revenue;
+        document.getElementById('commissionRate').value = data.commissionRate;
+        alert('Data loaded successfully!');
+    } else {
+        alert('No data found!');
+    }
 }
