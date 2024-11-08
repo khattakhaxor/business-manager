@@ -54,7 +54,6 @@ function saveData() {
   const grossProfit = revenue - totalInvestment;
   const netProfit = grossProfit - (grossProfit * (commissionRate / 100));
 
-  // Store the new entry
   const entry = {
     product,
     totalInvestment,
@@ -65,7 +64,7 @@ function saveData() {
   savedData.push(entry);
   localStorage.setItem('businessData', JSON.stringify(savedData));
 
-  // Add row to the table
+  // Insert data into table
   const row = dataTableBody.insertRow();
   row.innerHTML = `
     <td>${entry.product}</td>
@@ -115,17 +114,3 @@ function showGraph() {
     }
   });
 }
-
-// Display saved data on page load
-window.onload = function () {
-  savedData.forEach(entry => {
-    const row = dataTableBody.insertRow();
-    row.innerHTML = `
-      <td>${entry.product}</td>
-      <td>PKR ${entry.totalInvestment.toFixed(2)}</td>
-      <td>PKR ${entry.revenue.toFixed(2)}</td>
-      <td>PKR ${entry.netProfit.toFixed(2)}</td>
-      <td><button onclick="deleteEntry(this)">Delete</button></td>
-    `;
-  });
-};
