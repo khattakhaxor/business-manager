@@ -3,62 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Investment Tracker</title>
+    <title>Business Manager</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>Business Investment Tracker</h1>
-        
-        <!-- Investment Form -->
-        <form id="investmentForm">
-            <label for="product">Product</label>
-            <input type="text" id="product" required>
+        <h1>Business Manager</h1>
 
-            <label for="purchasePrice">Purchase Price (per unit)</label>
-            <input type="number" id="purchasePrice" required>
+        <div class="form-container">
+            <label for="investment">Investment (PKR):</label>
+            <input type="number" id="investment" placeholder="Enter Investment" required>
 
-            <label for="sellingPrice">Selling Price (per unit)</label>
-            <input type="number" id="sellingPrice" required>
+            <label for="revenue">Revenue (PKR):</label>
+            <input type="number" id="revenue" placeholder="Enter Revenue" required>
 
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" required>
+            <label for="commissionRate">Commission Rate (%):</label>
+            <input type="number" id="commissionRate" placeholder="Enter Commission Rate" required>
 
-            <label for="commission">Commission (%)</label>
-            <input type="number" id="commission" required>
-
-            <button type="submit">Calculate Profit</button>
-        </form>
-
-        <!-- Result Section -->
-        <div id="result" class="result" style="display:none;">
-            <h3>Result:</h3>
-            <p><strong>Total Investment:</strong> PKR <span id="totalInvestment"></span></p>
-            <p><strong>Revenue:</strong> PKR <span id="revenue"></span></p>
-            <p><strong>Net Profit after commission:</strong> PKR <span id="netProfit"></span></p>
-            <button id="saveData" style="display:none;">Save Data</button>
+            <button onclick="calculateData()">Calculate</button>
         </div>
 
-        <!-- Data Table -->
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Total Investment</th>
-                    <th>Revenue</th>
-                    <th>Net Profit</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic rows will be inserted here -->
-            </tbody>
-        </table>
+        <div class="result-container">
+            <h2>Result:</h2>
+            <p id="profit">Profit: </p>
+            <p id="commission">Commission: </p>
+            <p id="target">Estimated Target for Next Month: </p>
+        </div>
 
-        <!-- Show Graph Button -->
-        <button id="showGraph" style="display:none;">Show Graphical View</button>
-        <canvas id="graphCanvas" style="display:none;"></canvas>
+        <div class="chart-container">
+            <canvas id="profitChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="save-data-container">
+            <button onclick="saveData()">Save Data</button>
+            <button onclick="loadData()">Load Data</button>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
