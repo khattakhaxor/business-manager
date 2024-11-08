@@ -10,6 +10,8 @@
 
     <div class="container">
         <h1>Business Investment Tracker</h1>
+        
+        <!-- Investment Form -->
         <form id="investmentForm">
             <label for="product">Product</label>
             <input type="text" id="product" required>
@@ -29,6 +31,7 @@
             <button type="submit">Calculate Profit</button>
         </form>
 
+        <!-- Result Section -->
         <div id="result" class="result">
             <h3>Result:</h3>
             <p><strong>Total Investment:</strong> PKR <span id="totalInvestment"></span></p>
@@ -37,6 +40,7 @@
             <button id="saveData" style="display:none;">Save Data</button>
         </div>
 
+        <!-- Data Table -->
         <table id="dataTable">
             <thead>
                 <tr>
@@ -48,10 +52,11 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamic rows will appear here -->
+                <!-- Dynamic rows will be inserted here -->
             </tbody>
         </table>
 
+        <!-- Show Graph Button -->
         <button id="showGraph" style="display:none;">Show Graphical View</button>
         <canvas id="graphCanvas"></canvas>
     </div>
