@@ -9,8 +9,8 @@ function calculateData() {
         return;
     }
 
-    const commission = (commissionRate / 100) * revenue;
-    const profit = revenue - investment - commission;
+    const commission = (commissionRate / 100) * profit;
+    const profit = revenue - investment;
     const target = revenue * 1.1; // Estimated target for next month, assuming 10% growth
 
     document.getElementById('profit').innerText = `Profit: PKR ${profit.toFixed(2)}`;
